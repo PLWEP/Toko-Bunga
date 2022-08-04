@@ -1,7 +1,8 @@
 <?php 
 
 class ModelOrder {
-    private $table = 'pesanan';
+    private $tableOrder = 'pesanan';
+    private $tableDetail = 'detailpesanan';
     private $db;
     private $userid;
 
@@ -9,39 +10,63 @@ class ModelOrder {
         $this->db = new Database;
     }
 
-    public function getAll($userid) {
+    public function getAllOrder($userid) {
         $this->userid = $userid;
-        $sql = 'SELECT id_pesanan, nama_barang, nama_member, alamat, telp, total_barang, total_harga, kurir FROM ' . $this->table . ' join member on pesanan.member_id = member.id WHERE member_id = ' . $this->userid;
+        $sql = 'SELECT id_pesanan, jumlah, harga, nama FROM ' . $this->tableOrder . ' join barang on pesanan.barang_id = barang.id WHERE member_id = ' . $this->userid;
         $this->db->query($sql);
         return $this->db->resultSet();
     }
 
-    public function getAllAdmin() {
-        $sql = 'SELECT id_pesanan, nama_barang, nama_member, alamat, telp, total_barang, total_harga, kurir FROM ' . $this->table . ' join member on pesanan.member_id = member.id';
+    public function getAllDetail($orderid) {
+        $sql = 'SELECT * FROM ' . $this->tableDetail . ' WHERE id_pesanan = ' . $orderid;
         $this->db->query($sql);
         return $this->db->resultSet();
     }
 
     public function add($data, $userid) {
         $this->userid = $userid;
-        $namabarang=$data['namabarang'];
-        $jumlah=$data['jumlahbrg'];
-        $total=$data['totalhrg'];
-        $kurir=$data['kurir'];
+        $Order = $this->addOrder($data['cart'], $userid);
+        $this->addDetail($data,$Order);
+    }
 
-        $this->db->query('SELECT if(max(id_pesanan)is null,1,max(id_pesanan)+1) as maks_id  FROM ' . $this->table);
-            $data=$this->db->resultSet();
-            foreach ($data as $rec){
+    public function addOrder($data, $userid) {
+        $this->userid = $userid;
+
+        $this->db->query('SELECT if(max(id_pesanan)is null,1,max(id_pesanan)+1) as maks_id  FROM ' . $this->tableOrder);
+            $id=$this->db->resultSet();
+            foreach ($id as $rec){
                 $id=$rec["maks_id"];
         }
-        
-        $sql = 'INSERT INTO ' . $this->table. ' (id_pesanan,member_id,nama_barang, total_barang,total_harga,kurir) values ( :id ,'. $this->userid .', :namabarang, :jumlah, :total_harga, :kurir)';
+
+        foreach($data as $d) {
+            $barangid = $d['id'];
+            $jumlah = $d['jumlah'];
+
+            $sql = 'INSERT INTO ' . $this->tableOrder. ' (id_pesanan,member_id,barang_id, jumlah) values ( :id , '. $this->userid .', :barangid, :jumlah)';
+            $this->db->query($sql);
+            $this->db->bind('id', $id);
+            $this->db->bind('barangid', $barangid);
+            $this->db->bind('jumlah', $jumlah);
+            $this->db->execute();
+        }
+
+        return $id;
+    }
+
+    public function addDetail($data, $idpesanan) {
+        $id = $idpesanan;
+        $total=$data['total'];
+        $kurir=$data['kurir'];
+        $alamat= $data['alamat'];
+        $pembayaran= $data['pembayaran'];
+
+        $sql = 'INSERT INTO ' . $this->tableDetail. ' (id_pesanan,total,kurir,alamat,jenis_pembayaran) values ( :id , :total, :kurir, :alamat, :pembayaran)';
         $this->db->query($sql);
         $this->db->bind('id', $id);
-        $this->db->bind('namabarang',$namabarang);
-        $this->db->bind('jumlah',$jumlah);
-        $this->db->bind('total_harga',$total);
-        $this->db->bind('kurir',$kurir);
+        $this->db->bind('total', $total);
+        $this->db->bind('kurir', $kurir);
+        $this->db->bind('alamat', $alamat);
+        $this->db->bind('pembayaran', $pembayaran);
         $res=$this->db->execute();
     }
 }

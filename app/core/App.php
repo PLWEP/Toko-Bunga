@@ -1,14 +1,20 @@
 <?php 
     class App {
-        protected $controller = 'Home';
+        protected $controller = 'Product';
         protected $method = 'index';
         protected $params = [];
+        protected $cookie_name = 'keranjang';
+        protected $cookie_value;
 
         public function __construct() {
             $url = $this->parseURL();
+            $this->cookie_value = rand();
+            if(!isset($_COOKIE[$this->cookie_name])) {
+                setcookie($this->cookie_name, $this->cookie_value, time() + (86400 * 30), "/");
+            } 
 
             if(is_null($url)) {
-                $url = array("Home");
+                $url = array("Product");
             }
 
             if(file_exists('../app/controllers/' . $url[0] . '.php')) {

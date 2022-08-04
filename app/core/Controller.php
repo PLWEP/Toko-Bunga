@@ -7,23 +7,17 @@
         public function view($dir, $data = [])
         {
             if(isset($_SESSION['id'])) {
-                require_once '../app/views/templates/' . $_SESSION['status'] . '/index.php';
-                require_once '../app/views/' . $dir . '.php';
-                require_once '../app/views/templates/footer.php';
+                require_once '../app/views/templates/login/header.php';
             } else {
-                require_once '../app/views/' . $dir . '.php';
+                require_once '../app/views/templates/header.php';
             }
+            require_once '../app/views/' . $dir . '.php';
+            require_once '../app/views/templates/footer.php';
         }
 
-        public function viewFolder($folder, $file, $data = [])
+        public function viewWithoutTemplates($dir) 
         {
-            if(isset($_SESSION['id'])) {
-                require_once '../app/views/templates/' . $_SESSION['status'] . '/index.php';
-                require_once '../app/views/' . $folder . '/' .$_SESSION['status']. '/' . $file . '.php';
-                require_once '../app/views/templates/footer.php';
-            } else {
-                require_once '../app/views/' . $view . '.php';
-            }
+            require_once '../app/views/' . $dir . '.php';
         }
 
         public function model($model)

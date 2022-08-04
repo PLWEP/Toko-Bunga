@@ -119,6 +119,11 @@ h2 {
     font-weight: 400;
 }
 
+h3 {
+    font-size: 16px;
+    font-weight: 400;
+}
+
 .btn {
     color: black;
     text-decoration: none;
@@ -157,7 +162,7 @@ label {
     font-size: 15px;
 }
 
-input {
+input, select {
     height: 50px;
     padding: 5px 15px;
     border: 1px solid lightgrey;
@@ -165,14 +170,12 @@ input {
     font-size: 15px;
 }
 
-.radiobtn {
-    display: grid;
-    grid-template-columns: 1fr 24fr;
-    align-items: center;
-}
-
-.radiobtn label {
-    grid-column: 1 / span 2;
+textarea {
+    height: 100px;
+    padding: 5px 15px;
+    border: 1px solid lightgrey;
+    box-sizing: border-box;
+    font-size: 15px;
 }
 
 button {
@@ -274,6 +277,10 @@ button {
     height: 150px;
 }
 
+.boxdata h3 {
+    text-align: center;
+}
+
 /* Login */
 .validation{
     width: 400px;
@@ -288,7 +295,7 @@ button {
     font-size: 30px;
 }
 
-.validation a {
+.validation .register {
     display: block;
     text-align: center;
     text-decoration: underline;
@@ -301,4 +308,14 @@ button {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 1em;
+}
+
+/* Pesanan */
+.tabelbarang {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+}
+
+.tabelbarang p {
+    justify-self: end;
 }

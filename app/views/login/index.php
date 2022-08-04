@@ -19,8 +19,11 @@ $temp = "
 <body>
     <div class='container'>
         <section class='validation'>
-            <h1>Login</h1>
-            <form action='".BASEURL."/account/loginAction' method='post'>
+            <div class='contenthead'>
+                <h2>Login</h2>
+                <a href='".BASEURL."' class='btn'>Kembali</a>
+            </div>
+            <form action='".BASEURL."/login/loginAction' method='post'>
                     <label for='email'><b>Email</b></label>
                     <input type='text' placeholder='Masukan Email' name='temail' required>
 
@@ -29,7 +32,7 @@ $temp = "
 
                     <button type='submit' name='login'>Login</button>
             </form>
-            <a href='".BASEURL."/account/registerLayout'>Belum punya akun?? Register disini</a>
+            <a href='".BASEURL."/register' class='register'>Belum punya akun?? Register disini</a>
     </section>
     </div>
 </body>

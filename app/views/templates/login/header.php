@@ -7,7 +7,7 @@ $temp =
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
 
-    <title>Toko Bunga</title>
+    <title>Toko ABC</title>
 
     <!-- Styles -->
     <link rel='stylesheet' href='".BASEURL."/style/style.css'>
@@ -20,13 +20,12 @@ $temp =
 <body>
     <header>
         <div class='container'>
-            <h1>Toko Bunga</h1>
+            <h1>Toko ABC</h1>
             <div class='bar'>
-                <a href='".BASEURL."/home' aria-current='page'><p>Home</p></a>
-                <a href='".BASEURL."/product'><p>Product</p></a>
-                <a href='".BASEURL."/transaction'><p>Order</p></a>
-                <a href='".BASEURL."/profile'><p>Profil</p></a>
-                <a href='".BASEURL."/account/logoutAction'><p>LogOut</p></a>
+                <a href='".BASEURL."/product' aria-current='page'><p>Home</p></a>
+                <a href='".BASEURL."/Cart'><p>Keranjang</p></a>
+                <a href='".BASEURL."/order'><p>Pesanan</p></a>
+                <a href='".BASEURL."/login/logoutAction'><p>LogOut</p></a>
             </div>
         </div>
     </header>

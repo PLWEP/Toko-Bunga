@@ -20,9 +20,9 @@ $temp = "
     <div class='container'>
     <div class='contenthead'>
         <h2>Register</h2>
-        <a href='".BASEURL."' class='btn'>Kembali</a>
+        <a href='".BASEURL."/login' class='btn'>Kembali</a>
     </div>
-    <form action='".BASEURL."/account/registerAction' method='post' enctype='multipart/form-data'> 
+    <form action='".BASEURL."/register/registerAction' method='post' enctype='multipart/form-data'> 
         
         <label for='email'>Email</label>
         <input type='text' id='email' name='temail'> 
@@ -30,28 +30,20 @@ $temp = "
         <label for='pass'>Password</label>
         <input type='text' id='pass' name='tpass'> 
 
-        <label for='nama'>Nama Member</label>
+        <label for='nama'>Nama</label>
         <input type='text' id='nama' name='tnama'>
 
-        <label for='telp'>Telp</label>
+        <label for='telp'>Telpon</label>
         <input type='text' id='telp' name='ttelp'> 
 
         <label for='alamat'>Alamat</label>
-        <input type='text' id='alamat' name='talamat'> 
-
-        <label for='kota'>Kota</label>
-        <input type='text' id='kota' name='tkota'> 
-
-        <label for='provinsi'>Provinsi</label>
-        <input type='text' id='provinsi' name='tprov'> 
-
-        <div class='radiobtn'>
+        <textarea id='alamat' name='talamat'></textarea> 
+        
         <label for='gender'>Gender</label>
-            <input type='radio' id='gender' name='tgender' value='1'>
-            <p>Laki Laki</p>
-            <input type='radio' id='gender' name='tgender' value='2'> 
-            <p>Perempuan</p>
-        </div>
+        <select name='tgender' id='gender'>
+            <option value='2'>Perempuan</option>>
+            <option value='1'>Laki-Laki</option>>
+        </select>
 
         <button type='submit'>Register</button>	
 	</form>
